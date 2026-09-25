@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --navy: #00275f;
+    --deep-navy: #001c4c;
+    --blue: #1253a2;
+    --gold: #ffad00;
+    --text: #121b2a;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #e9edf3;
+    color: var(--text);
+}
+
+.page {
+    width: min(1200px, 94%);
+    margin: 0 auto;
+    padding: 45px 0 55px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 28px;
+    align-items: stretch;
+}
+
+.business-card {
+    position: relative;
+    aspect-ratio: 1.586 / 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    box-shadow: 0 16px 35px rgba(0, 31, 80, 0.18);
+}
+
+/* FRONT */
+
+.front-card {
+    background-image: url("assets/front.png");
+    background-position: center;
+    background-size: cover;
+}
+
+.front-content {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8%;
+}
+
+.front-logo {
+    width: 62%;
+    height: auto;
+    object-fit: contain;
+
+    /* Slightly lower, matching the reference card */
+    transform: translateY(5%);
+}
+
+/* BACK */
+
+.back-card {
+    background-image: url("assets/back.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/*
+   Back-card layout:
+   - name/title near the upper-right
+   - hotel logo around the center-right
+   - contact details in the lower-right
+   - QR code toward the lower-left
+*/
+
+.back-top {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    padding: 8% 7% 6%;
+}
+
+.contact-info {
+    width: 45%;
+    padding-top: 0;
+    text-align: left;
+}
+
+.contact-info h2 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(11px, 1.55vw, 18px);
+    line-height: 1.05;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+}
+
+.contact-info h2 span {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.contact-row {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 6px;
+    margin: 4px 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(7px, 0.95vw, 11px);
+    line-height: 1.2;
+    color: #ffffff;
+
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.icon {
+    width: 13px;
+    height: 13px;
+
+    flex: 0 0 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--navy);
+}
+
+.icon svg {
+    width: 8px;
+    height: 8px;
+
+    fill: none;
+
+    stroke: currentColor;
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* RIGHT SIDE LOGO */
+
+.back-right {
+    position: absolute;
+    right: 7%;
+    top: 25%;
+
+    width: 32%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 6px;
+
+    transform: none;
+}
+
+.back-logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* QR CODE */
+
+.qr {
+    position: absolute;
+
+    left: 12%;
+    bottom: 13%;
+
+    width: 23%;
+    aspect-ratio: 1;
+
+    object-fit: contain;
+    background: white;
+    padding: 3px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* If QR is inside .back-right, override its position */
+.back-right .qr {
+    position: static;
+    width: 70%;
+    padding: 3px;
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+    .page {
+        padding-top: 28px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .business-card {
+        width: 100%;
+    }
+
+    .front-content {
+        padding: 8%;
+    }
+
+    .front-logo {
+        width: 62%;
+    }
+
+    .back-top {
+        padding: 8% 7% 6%;
+    }
+
+    .contact-info {
+        width: 45%;
+    }
+
+    .back-right {
+        right: 7%;
+        top: 25%;
+        width: 32%;
+    }
+
+    .qr {
+        left: 12%;
+        bottom: 13%;
+        width: 23%;
+    }
+}
